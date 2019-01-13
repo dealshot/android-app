@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "426040047061",
+    "firebase_url": "https://dealshot-f7d9b.firebaseio.com",
+    "project_id": "dealshot-f7d9b",
+    "storage_bucket": "dealshot-f7d9b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426040047061:android:d018d40c5199cefb",
+        "android_client_info": {
+          "package_name": "com.dealshot.dealshotandroidapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426040047061-behfu1kdgsf4rb6fjjd3en7f6trgpuuc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH34Oo_H2QPEBeQRJ1Nxt2VZPpk26ZOvI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
