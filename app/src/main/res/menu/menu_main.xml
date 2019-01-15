@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="rose.fengy3.foodrater.MainActivity">
+    <item android:id="@+id/action_settings"
+          android:icon="@drawable/ic_launcher_foreground"
+          android:orderInCategory="100"
+          app:showAsAction="always"
+          android:title="@string/my_profile"/>
+</menu>
