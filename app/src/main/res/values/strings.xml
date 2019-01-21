@@ -16,4 +16,5 @@
     <string name="my_profile">my profile</string>
     <string name="errand_info">Errand info</string>
     <string name="take_it">Take it!</string>
+    <string name="action_join_app">Join Deal Shot!</string>
 </resources>
