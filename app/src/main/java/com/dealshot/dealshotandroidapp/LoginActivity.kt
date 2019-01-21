@@ -46,12 +46,13 @@ class LoginActivity : AppCompatActivity() {
     super.onActivityResult(requestCode, resultCode, data)
 
     if (requestCode == RC_SIGN_IN) {
-      val response = IdpResponse.fromResultIntent(data)
-
       if (resultCode == Activity.RESULT_OK) {
-        // Successfully signed in
         val user = FirebaseAuth.getInstance().currentUser
-        // TODO (@xinx): if successfully log in.
+        val intent = Intent(this, PlazaActivity::class.java)
+        val bundle: Bundle = Bundle()
+        bundle.putParcelable(PlazaActivity.ARGS_USER, user)
+        startActivity(intent, bundle)
+        finish()
       } else {
         // TODO (@xinx): if cannot log in.
       }
