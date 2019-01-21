@@ -1,7 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+            android:layout_height="120dp"
+            android:layout_width="match_parent">
+        <ImageView
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_launcher_foreground"
+                android:id="@+id/user_head_fragment"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+        <TextView
+                android:id="@+id/errand_name_fragment"
+                android:layout_toRightOf="@id/user_head_fragment"
+                android:layout_margin="18dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+        <TextView
+                android:id="@+id/errand_distance_fragment"
+                android:textSize="16sp"
+                android:layout_alignLeft="@id/errand_name_fragment"
+                android:layout_below="@+id/errand_name_fragment"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+        <TextView
+                android:id="@+id/errand_time_fragment"
+                android:layout_below="@id/errand_name_fragment"
+                android:layout_toRightOf="@id/errand_distance_fragment"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
 
-</LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
