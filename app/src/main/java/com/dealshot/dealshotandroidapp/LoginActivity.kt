@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 /**
  * A login screen that offers login via email/password.
  */
-class LoginActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
   companion object {
     private const val RC_SIGN_IN = 100
@@ -46,12 +46,8 @@ class LoginActivity : AppCompatActivity() {
     super.onActivityResult(requestCode, resultCode, data)
 
     if (requestCode == RC_SIGN_IN) {
-      val response = IdpResponse.fromResultIntent(data)
-
       if (resultCode == Activity.RESULT_OK) {
-        // Successfully signed in
         val user = FirebaseAuth.getInstance().currentUser
-        // TODO (@xinx): if successfully log in.
       } else {
         // TODO (@xinx): if cannot log in.
       }
