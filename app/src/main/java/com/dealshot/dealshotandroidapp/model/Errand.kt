@@ -1,4 +1,3 @@
 package com.dealshot.dealshotandroidapp.model
 
-class Errand {
-}
+data class Errand(val title: String)

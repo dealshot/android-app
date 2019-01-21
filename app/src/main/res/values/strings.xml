@@ -17,4 +17,9 @@
     <string name="errand_info">Errand info</string>
     <string name="take_it">Take it!</string>
     <string name="action_join_app">Join Deal Shot!</string>
+    <string name="plaza_welcome">Welcome, %s!</string>
+    <string name="create_errand">Create Errand</string>
+    <string name="errand_name_hint">Errand name</string>
+    <string name="create_errand_dialog_title">Create Errand</string>
+    <string name="create">Create</string>
 </resources>

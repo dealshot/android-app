@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 /**
  * A login screen that offers login via email/password.
  */
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
   companion object {
     private const val RC_SIGN_IN = 100
@@ -48,8 +48,15 @@ class MainActivity : AppCompatActivity() {
     if (requestCode == RC_SIGN_IN) {
       if (resultCode == Activity.RESULT_OK) {
         val user = FirebaseAuth.getInstance().currentUser
+
+        val intent = Intent(this, PlazaActivity::class.java)
+        val bundle = Bundle()
+        bundle.putParcelable(PlazaActivity.ARGS_USER, user)
+
+        startActivity(intent, bundle)
+        finish()
       } else {
-        // TODO (@xinx): if cannot log in.
+        // TODO: if cannot log in.
       }
     }
   }
