@@ -12,4 +12,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="errands_around_me">Errands around me</string>
+    <string name="my_profile">my profile</string>
+    <string name="errand_info">Errand info</string>
+    <string name="take_it">Take it!</string>
 </resources>
