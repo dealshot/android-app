@@ -1,8 +1,8 @@
-package com.dealshot.dealshotandroidapp.store
+package com.dealshot.dealshotandroidapp.dao
 
 import com.dealshot.dealshotandroidapp.model.Errand
 
-object ErrandStore {
+object ErrandDAO {
   private val errandList: ArrayList<Errand> = arrayListOf()
 
   fun getTotal(): Int {

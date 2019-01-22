@@ -4,11 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
-
-import kotlinx.android.synthetic.main.activity_login.*
 
 /**
  * A login screen that offers login via email/password.
@@ -27,9 +25,7 @@ class LoginActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_login)
-
-    join_app_button.setOnClickListener { createSignInIntent() }
+    createSignInIntent()
   }
 
   private fun createSignInIntent() {
@@ -37,6 +33,8 @@ class LoginActivity : AppCompatActivity() {
       AuthUI.getInstance()
         .createSignInIntentBuilder()
         .setAvailableProviders(providers)
+        .setAlwaysShowSignInMethodScreen(true)
+        .setIsSmartLockEnabled(false)
         .build(),
       RC_SIGN_IN
     )
@@ -57,6 +55,7 @@ class LoginActivity : AppCompatActivity() {
         finish()
       } else {
         // TODO: if cannot log in.
+        Log.d("app-login", "Cannot login.")
       }
     }
   }

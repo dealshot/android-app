@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.dealshot.dealshotandroidapp.R
 import com.dealshot.dealshotandroidapp.model.Errand
-import com.dealshot.dealshotandroidapp.store.ErrandStore
+import com.dealshot.dealshotandroidapp.dao.ErrandDAO
 import kotlinx.android.synthetic.main.card_errand.view.*
 
 class ErrandAdapter : RecyclerView.Adapter<ErrandAdapter.ErrandViewHolder>() {
@@ -16,11 +16,11 @@ class ErrandAdapter : RecyclerView.Adapter<ErrandAdapter.ErrandViewHolder>() {
   }
 
   override fun getItemCount(): Int {
-    return ErrandStore.getTotal()
+    return ErrandDAO.getTotal()
   }
 
   override fun onBindViewHolder(holder: ErrandViewHolder, index: Int) {
-    holder.bind(ErrandStore.getErrand(index))
+    holder.bind(ErrandDAO.getErrand(index))
   }
 
   inner class ErrandViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

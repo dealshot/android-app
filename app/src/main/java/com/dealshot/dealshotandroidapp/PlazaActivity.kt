@@ -2,7 +2,7 @@ package com.dealshot.dealshotandroidapp
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.dealshot.dealshotandroidapp.fragment.PlazaMainFragment
+import com.dealshot.dealshotandroidapp.fragment.PlazaFragment
 import com.google.firebase.auth.FirebaseUser
 
 class PlazaActivity : AppCompatActivity() {
@@ -20,7 +20,7 @@ class PlazaActivity : AppCompatActivity() {
 
     supportFragmentManager
       .beginTransaction()
-      .replace(R.id.fragment_container, PlazaMainFragment.newInstance(user))
+      .replace(R.id.fragment_container, PlazaFragment.newInstance(user))
       .commit()
   }
 }
