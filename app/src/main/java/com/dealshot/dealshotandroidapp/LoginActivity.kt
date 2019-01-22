@@ -33,8 +33,6 @@ class LoginActivity : AppCompatActivity() {
       AuthUI.getInstance()
         .createSignInIntentBuilder()
         .setAvailableProviders(providers)
-        .setAlwaysShowSignInMethodScreen(true)
-        .setIsSmartLockEnabled(false)
         .build(),
       RC_SIGN_IN
     )
