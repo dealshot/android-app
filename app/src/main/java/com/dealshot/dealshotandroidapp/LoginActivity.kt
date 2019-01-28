@@ -5,6 +5,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.dealshot.dealshotandroidapp.dao.AuthDAO
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 
@@ -43,13 +44,8 @@ class LoginActivity : AppCompatActivity() {
 
     if (requestCode == RC_SIGN_IN) {
       if (resultCode == Activity.RESULT_OK) {
-        val user = FirebaseAuth.getInstance().currentUser
-
-        val intent = Intent(this, PlazaActivity::class.java)
-        val bundle = Bundle()
-        bundle.putParcelable(PlazaActivity.ARGS_USER, user)
-
-        startActivity(intent, bundle)
+        AuthDAO.registerUser(FirebaseAuth.getInstance().currentUser)
+        startActivity(Intent(this, PlazaActivity::class.java))
         finish()
       } else {
         // TODO: if cannot log in.

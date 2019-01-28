@@ -20,7 +20,7 @@ class PlazaActivity : AppCompatActivity() {
 
     supportFragmentManager
       .beginTransaction()
-      .replace(R.id.fragment_container, PlazaFragment.newInstance(user))
+      .replace(R.id.fragment_container, PlazaFragment.newInstance())
       .commit()
   }
 }

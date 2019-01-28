@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dealshot.dealshotandroidapp.R
-import com.dealshot.dealshotandroidapp.adapter.ErrandAdapter
+import com.dealshot.dealshotandroidapp.adapter.UserErrandAdapter
 import com.dealshot.dealshotandroidapp.model.Errand
 import com.dealshot.dealshotandroidapp.dao.ErrandDAO
 import com.google.firebase.auth.FirebaseUser
@@ -15,15 +15,6 @@ import kotlinx.android.synthetic.main.dialog_create_errand.view.*
 import kotlinx.android.synthetic.main.fragment_plaza.view.*
 
 class PlazaFragment : Fragment() {
-  private var user: FirebaseUser? = null
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    arguments?.let {
-      user = it.getParcelable(ARGS_USER)
-    }
-  }
-
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
@@ -34,7 +25,7 @@ class PlazaFragment : Fragment() {
   }
 
   private fun bindView(view: View) {
-    val adapter = ErrandAdapter()
+    val adapter = UserErrandAdapter()
 
     view.plaza_errand_view.adapter = adapter
     view.plaza_errand_view.layoutManager = LinearLayoutManager(context)
@@ -47,7 +38,7 @@ class PlazaFragment : Fragment() {
       builder.setView(dialogView)
       builder.setPositiveButton(getString(R.string.create)) { _, _ ->
         val title = dialogView.errand_title_input.text
-        ErrandDAO.addErrand(Errand(title.toString()))
+        ErrandDAO.createErrand(Errand(title.toString()))
         adapter.notifyDataSetChanged()
       }
 
@@ -56,14 +47,7 @@ class PlazaFragment : Fragment() {
   }
 
   companion object {
-    private const val ARGS_USER = "PLAZA_USER"
-
     @JvmStatic
-    fun newInstance(user: FirebaseUser?) =
-      PlazaFragment().apply {
-        arguments = Bundle().apply {
-          putParcelable(ARGS_USER, user)
-        }
-      }
+    fun newInstance() = PlazaFragment()
   }
 }

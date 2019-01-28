@@ -5,28 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dealshot.dealshotandroidapp.R
-import com.dealshot.dealshotandroidapp.model.Errand
 import com.dealshot.dealshotandroidapp.dao.ErrandDAO
-import kotlinx.android.synthetic.main.card_errand.view.*
+import com.dealshot.dealshotandroidapp.model.Errand
+import com.dealshot.dealshotandroidapp.viewholder.ErrandViewHolder
 
-class ErrandAdapter : RecyclerView.Adapter<ErrandAdapter.ErrandViewHolder>() {
+abstract class ErrandAdapter : RecyclerView.Adapter<ErrandViewHolder>() {
+  init {
+    ErrandDAO.addSnapShotListener { _, _ ->
+      notifyDataSetChanged()
+    }
+  }
+
   override fun onCreateViewHolder(parent: ViewGroup, index: Int): ErrandViewHolder {
     val view = LayoutInflater.from(parent.context).inflate(R.layout.card_errand, parent, false)
     return ErrandViewHolder(view)
   }
 
-  override fun getItemCount(): Int {
-    return ErrandDAO.getTotal()
-  }
-
   override fun onBindViewHolder(holder: ErrandViewHolder, index: Int) {
-    holder.bind(ErrandDAO.getErrand(index))
+    val errand = getErrand(index)
+    holder.bind(errand)
+    updateUI(holder.itemView, errand)
   }
 
-  inner class ErrandViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun bind(errand: Errand) {
-      // TODO: bind errand details
-      itemView.errand_title.text = errand.title
-    }
-  }
+  open fun updateUI(itemView: View, errand: Errand) {}
+
+  abstract fun getErrand(index: Int): Errand
 }
