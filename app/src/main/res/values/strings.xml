@@ -22,4 +22,8 @@
     <string name="errand_name_hint">Errand name</string>
     <string name="create_errand_dialog_title">Create Errand</string>
     <string name="create">Create</string>
+    <string name="errand_description_hint">Describe your errand</string>
+    <string name="errand_location_hint">Location</string>
+    <string name="errand_dropoff_hint">Where you want to be dropoff</string>
+    <string name="errand_time_hint">When shall we go?</string>
 </resources>
