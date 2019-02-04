@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".PlazaActivity"/>
+        <activity android:name=".UserCenterActivity"/>
     </application>
 
 </manifest>

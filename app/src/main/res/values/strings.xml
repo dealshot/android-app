@@ -22,4 +22,25 @@
     <string name="errand_name_hint">Errand name</string>
     <string name="create_errand_dialog_title">Create Errand</string>
     <string name="create">Create</string>
+    <string name="claim">Claim</string>
+    <string name="release">Release</string>
+    <string name="remove">Remove</string>
+    <string name="unknown">Unknown</string>
+    <string name="cannot_login_warning">Sorry, cannot sign in at this moment.</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="delivery_location_hint">Delivery Location</string>
+    <string name="pick_up_location_hint">Pick up location</string>
+    <string name="plaza_tag">Plaza</string>
+    <string name="user_center_tag">User center</string>
+    <string name="pick_up_locale">Pick up at: %s</string>
+    <string name="deliver_locale">Deliver at: %s</string>
+    <string name="errand_detail_title">Errand Detail</string>
+    <string name="assignee_hint">Assignee</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit">Edit</string>
+    <string name="close">Close</string>
+    <string name="owned_errand_title">Posted</string>
+    <string name="closed_errand_title">Completed</string>
+    <string name="wip_errand_title">Undergoing</string>
+    <string name="status_locale">Current status: %s</string>
 </resources>

@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-    <android.support.design.widget.TextInputEditText
-            android:id="@+id/errand_title_input"
-            android:hint="@string/errand_name_hint"
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/user_center_errands_view"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"/>
 </RelativeLayout>
