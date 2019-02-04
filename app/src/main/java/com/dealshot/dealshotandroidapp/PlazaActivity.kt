@@ -30,11 +30,13 @@ class PlazaActivity : AppCompatActivity() {
     return when (item.itemId) {
       R.id.action_switch_segment -> {
         startActivity(Intent(this, UserCenterActivity::class.java))
+        finish()
         return true
       }
       R.id.action_sign_out -> {
         AuthController.signOut()
         startActivity(Intent(this, LoginActivity::class.java))
+        finish()
         return true
       }
       else -> super.onOptionsItemSelected(item)

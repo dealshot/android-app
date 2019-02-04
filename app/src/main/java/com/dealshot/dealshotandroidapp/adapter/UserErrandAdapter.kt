@@ -14,10 +14,10 @@ class UserErrandAdapter(private var sourceType: ErrandDAO.SourceType) : ErrandAd
   private fun isEditable(errand: Errand) =
     sourceType == ErrandDAO.SourceType.USER_OWNED && errand.status == Errand.Companion.Status.UNASSIGNED
 
-  override fun updateUI(itemView: View, context: Context, errand: Errand) {
+  override fun updateErrandCardView(context: Context, cardView: View, errand: Errand) {
     val isErrandEditable = isEditable(errand)
 
-    itemView.setOnClickListener {
+    cardView.setOnClickListener {
       val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_errand, null)
       val builder = AlertDialog.Builder(context)
 

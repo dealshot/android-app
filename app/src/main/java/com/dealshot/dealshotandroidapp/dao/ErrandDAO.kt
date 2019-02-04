@@ -36,7 +36,6 @@ object ErrandDAO {
       userOwnedErrandList = arrayListOf()
       userWIPErrandList = arrayListOf()
       userClosedErrandList = arrayListOf()
-
       plazaErrandList = arrayListOf()
 
       if (AuthController.hasUser()) {

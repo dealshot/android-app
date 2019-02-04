@@ -12,8 +12,8 @@ import com.dealshot.dealshotandroidapp.model.Errand
 import kotlinx.android.synthetic.main.dialog_errand.view.*
 
 class PlazaErrandAdapter : ErrandAdapter(ErrandDAO.SourceType.PLAZA) {
-  override fun updateUI(itemView: View, context: Context, errand: Errand) {
-    itemView.setOnClickListener {
+  override fun updateErrandCardView(context: Context, cardView: View, errand: Errand) {
+    cardView.setOnClickListener {
       val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_errand, null)
       val builder = AlertDialog.Builder(context)
 
