@@ -1,4 +1,4 @@
-package com.dealshot.dealshotandroidapp.adapter
+package com.dealshot.dealshotandroidapp.ui.adapter
 
 import android.content.Context
 import android.support.v4.app.Fragment
@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import com.dealshot.dealshotandroidapp.R
 import com.dealshot.dealshotandroidapp.dao.ErrandDAO
-import com.dealshot.dealshotandroidapp.fragment.UserCenterSectionFragment
+import com.dealshot.dealshotandroidapp.ui.fragment.UserCenterSectionFragment
 
 class UserCenterFragmentAdapter(fm: FragmentManager, val context: Context) : FragmentPagerAdapter(fm) {
   override fun getItem(position: Int): Fragment {

@@ -34,8 +34,8 @@ class LoginActivity : AppCompatActivity() {
 
     if (requestCode == RC_SIGN_IN) {
       if (resultCode == Activity.RESULT_OK) {
-        startActivity(Intent(this, PlazaActivity::class.java))
         finish()
+        startActivity(Intent(this, PlazaActivity::class.java))
       } else {
         Toast.makeText(
           this,

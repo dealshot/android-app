@@ -1,4 +1,4 @@
-package com.dealshot.dealshotandroidapp.adapter
+package com.dealshot.dealshotandroidapp.ui.adapter
 
 import android.app.AlertDialog
 import android.content.Context

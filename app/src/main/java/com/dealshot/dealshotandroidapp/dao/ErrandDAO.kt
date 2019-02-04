@@ -3,25 +3,11 @@ package com.dealshot.dealshotandroidapp.dao
 import android.os.Parcelable
 import com.dealshot.dealshotandroidapp.model.Errand
 import com.google.firebase.Timestamp
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
 import kotlinx.android.parcel.Parcelize
 
 object ErrandDAO {
   private const val ERRAND_COLLECTION = "ERRAND"
-
-  private val errandRef = FirebaseFirestore.getInstance().collection(ERRAND_COLLECTION)
-
-  private var userOwnedErrandList: ArrayList<Errand> = arrayListOf()
-
-  private var userWIPErrandList: ArrayList<Errand> = arrayListOf()
-
-  private var userClosedErrandList: ArrayList<Errand> = arrayListOf()
-
-  private var plazaErrandList: ArrayList<Errand> = arrayListOf()
 
   @Parcelize
   enum class SourceType : Parcelable {
@@ -31,13 +17,27 @@ object ErrandDAO {
     PLAZA
   }
 
+  private val errandRef = FirebaseFirestore.getInstance().collection(ERRAND_COLLECTION)
+
+  private var userOwnedErrandList: ArrayList<Errand> = ArrayList()
+
+  private var userOwnedErrandListListener: ListenerRegistration? = null
+
+  private var userWIPErrandList: ArrayList<Errand> = ArrayList()
+
+  private var userWIPErrandListListener: ListenerRegistration? = null
+
+  private var userClosedErrandList: ArrayList<Errand> = ArrayList()
+
+  private var userClosedErrandListListener: ListenerRegistration? = null
+
+  private var plazaErrandList: ArrayList<Errand> = ArrayList()
+
+  private var plazaErrandListListener: ListenerRegistration? = null
+
   init {
     AuthController.addAuthStateListener {
-      userOwnedErrandList = arrayListOf()
-      userWIPErrandList = arrayListOf()
-      userClosedErrandList = arrayListOf()
-      plazaErrandList = arrayListOf()
-
+      clearBuffer()
       if (AuthController.hasUser()) {
         syncUserErrand()
         syncPlazaErrand()
@@ -45,48 +45,68 @@ object ErrandDAO {
     }
   }
 
+  private fun clearBuffer() {
+    userOwnedErrandList.clear()
+    userWIPErrandList.clear()
+    userClosedErrandList.clear()
+    plazaErrandList.clear()
+
+    userOwnedErrandListListener?.remove()
+    userOwnedErrandListListener = null
+    userWIPErrandListListener?.remove()
+    userWIPErrandListListener = null
+    userClosedErrandListListener?.remove()
+    userClosedErrandListListener = null
+    plazaErrandListListener?.remove()
+    plazaErrandListListener = null
+  }
+
   private fun syncUserErrand() {
-    errandRef
-      .whereEqualTo(Errand.OWNER_KEY, AuthController.currentUID())
-      .addSnapshotListener { querySnapshot, _ ->
-        querySnapshot!!.documentChanges.map {
-          val errand = Errand.fromSnapshot(it.document)
-          syncIncomingDocument(errand, it.type, userOwnedErrandList)
+    userOwnedErrandListListener =
+      errandRef
+        .whereEqualTo(Errand.OWNER_KEY, AuthController.currentUID())
+        .addSnapshotListener { querySnapshot, _ ->
+          querySnapshot!!.documentChanges.map {
+            val errand = Errand.fromSnapshot(it.document)
+            syncIncomingDocument(errand, it.type, userOwnedErrandList)
+          }
         }
-      }
 
-    errandRef
-      .whereEqualTo(Errand.ASSIGNEE_KEY, AuthController.currentUID())
-      .whereEqualTo(Errand.STATUS_KEY, Errand.Companion.Status.WIP)
-      .addSnapshotListener { querySnapshot, _ ->
-        querySnapshot!!.documentChanges.map {
-          val errand = Errand.fromSnapshot(it.document)
-          syncIncomingDocument(errand, it.type, userWIPErrandList)
+    userWIPErrandListListener =
+      errandRef
+        .whereEqualTo(Errand.ASSIGNEE_KEY, AuthController.currentUID())
+        .whereEqualTo(Errand.STATUS_KEY, Errand.Companion.Status.WIP)
+        .addSnapshotListener { querySnapshot, _ ->
+          querySnapshot!!.documentChanges.map {
+            val errand = Errand.fromSnapshot(it.document)
+            syncIncomingDocument(errand, it.type, userWIPErrandList)
+          }
         }
-      }
 
-    errandRef
-      .whereEqualTo(Errand.ASSIGNEE_KEY, AuthController.currentUID())
-      .whereEqualTo(Errand.STATUS_KEY, Errand.Companion.Status.CLOSED)
-      .addSnapshotListener { querySnapshot, _ ->
-        querySnapshot!!.documentChanges.map {
-          val errand = Errand.fromSnapshot(it.document)
-          syncIncomingDocument(errand, it.type, userClosedErrandList)
+    userClosedErrandListListener =
+      errandRef
+        .whereEqualTo(Errand.ASSIGNEE_KEY, AuthController.currentUID())
+        .whereEqualTo(Errand.STATUS_KEY, Errand.Companion.Status.CLOSED)
+        .addSnapshotListener { querySnapshot, _ ->
+          querySnapshot!!.documentChanges.map {
+            val errand = Errand.fromSnapshot(it.document)
+            syncIncomingDocument(errand, it.type, userClosedErrandList)
+          }
         }
-      }
   }
 
   private fun syncPlazaErrand() {
-    errandRef
-      .whereEqualTo(Errand.STATUS_KEY, Errand.Companion.Status.UNASSIGNED)
-      .addSnapshotListener { querySnapshot, _ ->
-        querySnapshot!!.documentChanges.map {
-          val errand = Errand.fromSnapshot(it.document)
-          if (errand.owner != AuthController.currentUID()) {
-            syncIncomingDocument(errand, it.type, plazaErrandList)
+    plazaErrandListListener =
+      errandRef
+        .whereEqualTo(Errand.STATUS_KEY, Errand.Companion.Status.UNASSIGNED)
+        .addSnapshotListener { querySnapshot, _ ->
+          querySnapshot!!.documentChanges.map {
+            val errand = Errand.fromSnapshot(it.document)
+            if (errand.owner != AuthController.currentUID()) {
+              syncIncomingDocument(errand, it.type, plazaErrandList)
+            }
           }
         }
-      }
   }
 
   private fun syncIncomingDocument(errand: Errand, type: DocumentChange.Type, source: ArrayList<Errand>) {
