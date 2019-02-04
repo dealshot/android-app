@@ -1,11 +1,11 @@
-package com.dealshot.dealshotandroidapp.fragment
+package com.dealshot.dealshotandroidapp.ui.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import com.dealshot.dealshotandroidapp.R
-import com.dealshot.dealshotandroidapp.adapter.UserErrandAdapter
+import com.dealshot.dealshotandroidapp.ui.adapter.UserErrandAdapter
 import com.dealshot.dealshotandroidapp.dao.ErrandDAO
 import kotlinx.android.synthetic.main.fragment_user_center_section.view.*
 

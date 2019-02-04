@@ -1,4 +1,4 @@
-package com.dealshot.dealshotandroidapp.adapter
+package com.dealshot.dealshotandroidapp.ui.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.dealshot.dealshotandroidapp.R
 import com.dealshot.dealshotandroidapp.dao.ErrandDAO
 import com.dealshot.dealshotandroidapp.model.Errand
-import com.dealshot.dealshotandroidapp.viewholder.ErrandViewHolder
+import com.dealshot.dealshotandroidapp.ui.viewholder.ErrandViewHolder
 
 abstract class ErrandAdapter(initSourceType: ErrandDAO.SourceType) : RecyclerView.Adapter<ErrandViewHolder>() {
   private var source: ArrayList<Errand>? = ErrandDAO.selectSource(initSourceType)
