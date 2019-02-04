@@ -4,39 +4,26 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.IdpResponse
-import com.google.firebase.auth.FirebaseAuth
-
-import kotlinx.android.synthetic.main.activity_login.*
+import android.widget.Toast
+import com.dealshot.dealshotandroidapp.dao.AuthController
 
 /**
  * A login screen that offers login via email/password.
  */
 class LoginActivity : AppCompatActivity() {
-
   companion object {
     private const val RC_SIGN_IN = 100
   }
 
-  private val providers = arrayListOf(
-    AuthUI.IdpConfig.EmailBuilder().build(),
-    AuthUI.IdpConfig.PhoneBuilder().build(),
-    AuthUI.IdpConfig.GoogleBuilder().build()
-  )
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_login)
-
-    join_app_button.setOnClickListener { createSignInIntent() }
+    createSignInIntent()
   }
 
   private fun createSignInIntent() {
     startActivityForResult(
-      AuthUI.getInstance()
+      AuthController
         .createSignInIntentBuilder()
-        .setAvailableProviders(providers)
         .build(),
       RC_SIGN_IN
     )
@@ -47,16 +34,13 @@ class LoginActivity : AppCompatActivity() {
 
     if (requestCode == RC_SIGN_IN) {
       if (resultCode == Activity.RESULT_OK) {
-        val user = FirebaseAuth.getInstance().currentUser
-
-        val intent = Intent(this, PlazaActivity::class.java)
-        val bundle = Bundle()
-        bundle.putParcelable(PlazaActivity.ARGS_USER, user)
-
-        startActivity(intent, bundle)
-        finish()
+        startActivity(Intent(this, PlazaActivity::class.java))
       } else {
-        // TODO: if cannot log in.
+        Toast.makeText(
+          this,
+          getString(R.string.cannot_login_warning),
+          Toast.LENGTH_SHORT
+        ).show()
       }
     }
   }
