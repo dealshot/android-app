@@ -31,8 +31,8 @@ abstract class ErrandAdapter(initSourceType: ErrandDAO.SourceType) : RecyclerVie
   override fun onBindViewHolder(holder: ErrandViewHolder, index: Int) {
     val errand = getErrand(index)
     holder.bind(errand)
-    updateUI(holder.itemView, holder.context, errand)
+    updateErrandCardView(holder.context, holder.itemView, errand)
   }
 
-  abstract fun updateUI(itemView: View, context: Context, errand: Errand)
+  abstract fun updateErrandCardView(context: Context, cardView: View, errand: Errand)
 }
