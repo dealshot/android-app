@@ -43,4 +43,14 @@
     <string name="closed_errand_title">Completed</string>
     <string name="wip_errand_title">Undergoing</string>
     <string name="status_locale">Current status: %s</string>
+    <string name="errand_type_hint">Choose your errand type</string>
+    <string name="delivery_notes_hint">Any other concerns?</string>
+    <string name="dropoff_location_hint">Where you want to go?</string>
+    <string name="setoff_time_hint">When to leave?</string>
+    <string-array name="errand_type_arrays">
+        <item>I want to go somewhere.</item>
+        <item>I want to have my fill.</item>
+        <item>Walmart/Meijer is too far</item>
+        <item>I'm gonna do something else</item>
+    </string-array>
 </resources>
