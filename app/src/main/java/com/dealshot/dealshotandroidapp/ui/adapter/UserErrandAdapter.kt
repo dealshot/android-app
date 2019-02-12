@@ -1,4 +1,4 @@
-package com.dealshot.dealshotandroidapp.adapter
+package com.dealshot.dealshotandroidapp.ui.adapter
 
 import android.app.AlertDialog
 import android.content.Context
@@ -12,15 +12,13 @@ import kotlinx.android.synthetic.main.dialog_errand.view.*
 
 class UserErrandAdapter(private var sourceType: ErrandDAO.SourceType) : ErrandAdapter(sourceType) {
   private fun isEditable(errand: Errand) =
-    sourceType == ErrandDAO.SourceType.USER_OWNED && errand.status == Errand.Companion.Status.UNASSIGNED
+      sourceType == ErrandDAO.SourceType.USER_OWNED && errand.status == Errand.Companion.Status.UNASSIGNED
 
-  override fun updateUI(itemView: View, context: Context, errand: Errand) {
+  override fun updateErrandCardView(context: Context, cardView: View, errand: Errand) {
     val isErrandEditable = isEditable(errand)
 
-    itemView.setOnClickListener {
+    cardView.setOnClickListener {
       val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_errand, null)
-      val builder = AlertDialog.Builder(context)
-
       dialogView.errand_title_input.setText(errand.title)
       dialogView.errand_title_input.isEnabled = isErrandEditable
       dialogView.pickup_location_input.setText(errand.pickupLocation)
@@ -34,8 +32,7 @@ class UserErrandAdapter(private var sourceType: ErrandDAO.SourceType) : ErrandAd
         dialogView.assignee_input.isEnabled = false
       }
 
-      builder.setTitle(context.getString(R.string.errand_detail_title))
-      builder.setView(dialogView)
+      val builder = AlertDialog.Builder(context)
       when (sourceType) {
         ErrandDAO.SourceType.USER_OWNED -> {
           if (errand.status == Errand.Companion.Status.UNASSIGNED) {
@@ -65,7 +62,10 @@ class UserErrandAdapter(private var sourceType: ErrandDAO.SourceType) : ErrandAd
           builder.setNegativeButton(context.getString(R.string.cancel)) { _, _ -> }
         }
       }
-      builder.setCancelable(true)
+      builder
+          .setTitle(context.getString(R.string.errand_detail_title))
+          .setView(dialogView)
+          .setCancelable(true)
       builder.show()
     }
   }

@@ -1,4 +1,4 @@
-package com.dealshot.dealshotandroidapp.viewholder
+package com.dealshot.dealshotandroidapp.ui.viewholder
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

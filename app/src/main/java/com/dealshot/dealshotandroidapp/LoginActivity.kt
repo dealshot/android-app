@@ -7,9 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.dealshot.dealshotandroidapp.dao.AuthController
 
-/**
- * A login screen that offers login via email/password.
- */
+/** A login screen that offers login via email/password. */
 class LoginActivity : AppCompatActivity() {
   companion object {
     private const val RC_SIGN_IN = 100
@@ -34,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
 
     if (requestCode == RC_SIGN_IN) {
       if (resultCode == Activity.RESULT_OK) {
+        finish()
         startActivity(Intent(this, PlazaActivity::class.java))
       } else {
         Toast.makeText(

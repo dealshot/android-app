@@ -1,4 +1,4 @@
-package com.dealshot.dealshotandroidapp.adapter
+package com.dealshot.dealshotandroidapp.ui.adapter
 
 import android.app.AlertDialog
 import android.content.Context
@@ -12,11 +12,9 @@ import com.dealshot.dealshotandroidapp.model.Errand
 import kotlinx.android.synthetic.main.dialog_errand.view.*
 
 class PlazaErrandAdapter : ErrandAdapter(ErrandDAO.SourceType.PLAZA) {
-  override fun updateUI(itemView: View, context: Context, errand: Errand) {
-    itemView.setOnClickListener {
+  override fun updateErrandCardView(context: Context, cardView: View, errand: Errand) {
+    cardView.setOnClickListener {
       val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_errand, null)
-      val builder = AlertDialog.Builder(context)
-
       dialogView.errand_title_input.setText(errand.title)
       dialogView.errand_title_input.isEnabled = false
       dialogView.pickup_location_input.setText(errand.pickupLocation)
@@ -25,12 +23,13 @@ class PlazaErrandAdapter : ErrandAdapter(ErrandDAO.SourceType.PLAZA) {
       dialogView.delivery_location_input.isEnabled = false
       dialogView.assignee_input_wrapper.visibility = GONE
 
-      builder.setTitle(context.getString(R.string.errand_detail_title))
-      builder.setView(dialogView)
-      builder.setPositiveButton(context.getText(R.string.claim)) { _, _ ->
-        ErrandDAO.updateErrand(errand.claim(AuthController.currentUID()))
-      }
-      builder.show()
+      AlertDialog.Builder(context)
+          .setTitle(context.getString(R.string.errand_detail_title))
+          .setView(dialogView)
+          .setPositiveButton(context.getText(R.string.claim)) { _, _ ->
+            ErrandDAO.updateErrand(errand.claim(AuthController.currentUID()))
+          }
+          .show()
     }
   }
 }
