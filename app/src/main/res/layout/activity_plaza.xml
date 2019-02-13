@@ -3,8 +3,17 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
+
+
                 tools:context=".PlazaActivity">
+
+    <ImageView
+            android:id="@+id/plaza_background"
+            android:src="@drawable/rose"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+    />
     <android.support.v7.widget.RecyclerView
             android:id="@+id/plaza_errand_view"
             android:layout_centerHorizontal="true"

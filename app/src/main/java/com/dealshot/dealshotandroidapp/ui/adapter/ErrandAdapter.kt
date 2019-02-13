@@ -11,7 +11,7 @@ import com.dealshot.dealshotandroidapp.model.Errand
 import com.dealshot.dealshotandroidapp.ui.viewholder.ErrandViewHolder
 
 abstract class ErrandAdapter(initSourceType: ErrandDAO.SourceType) : RecyclerView.Adapter<ErrandViewHolder>() {
-  private var source: ArrayList<Errand>? = ErrandDAO.selectSource(initSourceType)
+  protected var source: ArrayList<Errand>? = ErrandDAO.selectSource(initSourceType)
 
   init {
     ErrandDAO.addSnapShotListener { _, _ ->
