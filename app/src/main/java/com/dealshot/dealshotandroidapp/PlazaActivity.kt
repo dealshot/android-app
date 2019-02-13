@@ -14,7 +14,7 @@ class PlazaActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_plaza)
-    plaza_errand_view.adapter = PlazaErrandAdapter(supportFragmentManager)
+    plaza_errand_view.adapter = PlazaErrandAdapter()
     plaza_errand_view.layoutManager = LinearLayoutManager(this)
   }
 

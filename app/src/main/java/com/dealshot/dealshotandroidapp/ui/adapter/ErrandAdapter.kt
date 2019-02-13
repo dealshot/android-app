@@ -12,11 +12,10 @@ import com.dealshot.dealshotandroidapp.model.Errand
 import com.dealshot.dealshotandroidapp.ui.viewholder.ErrandViewHolder
 
 abstract class ErrandAdapter(
-  initSourceType: ErrandDAO.SourceType,
-  protected val fragmentManager: FragmentManager
+  initSourceType: ErrandDAO.SourceType
 ) :
   RecyclerView.Adapter<ErrandViewHolder>() {
-  private var source: ArrayList<Errand>? = ErrandDAO.selectSource(initSourceType)
+  private var sourceOrigin: ArrayList<Errand>? = ErrandDAO.selectSource(initSourceType)
 
   init {
     ErrandDAO.addSnapShotListener { _, _ ->
@@ -24,9 +23,11 @@ abstract class ErrandAdapter(
     }
   }
 
-  override fun getItemCount(): Int = source!!.size
+  protected open fun source(): ArrayList<Errand> = sourceOrigin!!
 
-  private fun getErrand(index: Int): Errand = source!![index]
+  override fun getItemCount(): Int = source().size
+
+  private fun getErrand(index: Int): Errand = source()[index]
 
   override fun onCreateViewHolder(parent: ViewGroup, index: Int): ErrandViewHolder = ErrandViewHolder(
     LayoutInflater.from(parent.context).inflate(R.layout.card_errand, parent, false),

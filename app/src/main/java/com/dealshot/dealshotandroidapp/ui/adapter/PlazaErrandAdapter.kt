@@ -9,12 +9,10 @@ import com.dealshot.dealshotandroidapp.dao.ErrandDAO
 import com.dealshot.dealshotandroidapp.model.Errand
 import com.dealshot.dealshotandroidapp.ui.dialog.ErrandManipulationDialogBuilder
 
-class PlazaErrandAdapter(
-  fragmentManager: FragmentManager
-) : ErrandAdapter(ErrandDAO.SourceType.PLAZA, fragmentManager) {
+class PlazaErrandAdapter : ErrandAdapter(ErrandDAO.SourceType.PLAZA) {
   override fun updateErrandCardView(context: Context, cardView: View, errand: Errand) {
     cardView.setOnClickListener {
-      ErrandManipulationDialogBuilder(context, fragmentManager)
+      ErrandManipulationDialogBuilder(context)
         .setTitle(context.getString(R.string.errand_detail_title))
         .setErrand(errand)
         .setViewInvisible(R.id.assignee_input_wrapper)
