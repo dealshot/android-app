@@ -1,5 +1,6 @@
 package com.dealshot.dealshotandroidapp.ui.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -9,8 +10,8 @@ import com.dealshot.dealshotandroidapp.dao.AuthController
 import com.dealshot.dealshotandroidapp.ui.adapter.UserErrandAdapter
 import com.dealshot.dealshotandroidapp.dao.ErrandDAO
 import com.dealshot.dealshotandroidapp.model.Errand
-import com.dealshot.dealshotandroidapp.ui.dialog.ErrandDialogBuilder
-import kotlinx.android.synthetic.main.dialog_errand.view.*
+import com.dealshot.dealshotandroidapp.ui.dialog.ErrandManipulationDialogBuilder
+import kotlinx.android.synthetic.main.dialog_errand_manipulation.view.*
 import kotlinx.android.synthetic.main.fragment_user_center_section.view.*
 
 class UserCenterSectionFragment : Fragment() {
@@ -31,31 +32,34 @@ class UserCenterSectionFragment : Fragment() {
     return view
   }
 
-  private fun bindView(view: View) {
-    view.user_center_errands_view.layoutManager = LinearLayoutManager(context)
-    view.user_center_errands_view.adapter = UserErrandAdapter(sourceType!!)
+  @SuppressLint("RestrictedApi")
+  private fun bindView(itemView: View) {
+    itemView.user_center_errands_view.layoutManager = LinearLayoutManager(context)
+    itemView.user_center_errands_view.adapter = UserErrandAdapter(sourceType!!, fragmentManager!!)
     if (canAdd) {
-      view.create_errand_button.visibility = View.VISIBLE
-      view.create_errand_button.setOnClickListener {
-        ErrandDialogBuilder(context!!)
-            .setTitle(getString(R.string.create_errand_dialog_title))
-            .setViewInvisible(R.id.assignee_input_wrapper)
-            .setViewInvisible(R.id.errand_owner_input_wrapper)
-            .setPositiveButton(getString(R.string.create)) {
-              val title = it.errand_title_input.text.toString()
-              val pickupLocation = it.pickup_location_input.text.toString()
-              val deliveryLocation = it.delivery_location_input.text.toString()
-              ErrandDAO.createErrand(
-                  Errand(
-                      AuthController.currentUID(),
-                      AuthController.currentContact(),
-                      title,
-                      pickupLocation,
-                      deliveryLocation
-                  )
+      itemView.create_errand_button.visibility = View.VISIBLE
+      itemView.create_errand_button.setOnClickListener {
+        ErrandManipulationDialogBuilder(context!!, fragmentManager!!)
+          .setTitle(getString(R.string.create_errand_dialog_title))
+          .setEnableEdit(true)
+          .setViewInvisible(R.id.assignee_input_wrapper)
+          .setViewInvisible(R.id.errand_owner_input_wrapper)
+          .setPositiveButton(getString(R.string.create)) {
+            val title = it.errand_title_input.text.toString()
+            val pickupLocation = it.pickup_location_input.text.toString()
+            val deliveryLocation = it.delivery_location_input.text.toString()
+            ErrandDAO.createErrand(
+              Errand(
+                AuthController.currentUID(),
+                AuthController.currentContact(),
+                title,
+                pickupLocation,
+                deliveryLocation
               )
-            }
-            .show()
+            )
+          }
+          .setNegativeButton(getString(R.string.leave)) {}
+          .launch()
       }
     }
   }

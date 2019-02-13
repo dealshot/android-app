@@ -8,7 +8,10 @@ import com.dealshot.dealshotandroidapp.R
 import com.dealshot.dealshotandroidapp.dao.ErrandDAO
 import com.dealshot.dealshotandroidapp.ui.fragment.UserCenterSectionFragment
 
-class UserCenterFragmentAdapter(fm: FragmentManager, private val context: Context) : FragmentPagerAdapter(fm) {
+class UserCenterFragmentAdapter(
+  fragmentManager: FragmentManager,
+  private val context: Context
+) : FragmentPagerAdapter(fragmentManager) {
   override fun getItem(position: Int): Fragment {
     val type = SOURCE_TYPE_OPTION[position]
     return UserCenterSectionFragment.newInstance(type, type == ErrandDAO.SourceType.USER_OWNED)

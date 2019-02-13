@@ -1,6 +1,7 @@
 package com.dealshot.dealshotandroidapp.ui.adapter
 
 import android.content.Context
+import android.support.v4.app.FragmentManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,11 @@ import com.dealshot.dealshotandroidapp.dao.ErrandDAO
 import com.dealshot.dealshotandroidapp.model.Errand
 import com.dealshot.dealshotandroidapp.ui.viewholder.ErrandViewHolder
 
-abstract class ErrandAdapter(initSourceType: ErrandDAO.SourceType) : RecyclerView.Adapter<ErrandViewHolder>() {
+abstract class ErrandAdapter(
+  initSourceType: ErrandDAO.SourceType,
+  protected val fragmentManager: FragmentManager
+) :
+  RecyclerView.Adapter<ErrandViewHolder>() {
   private var source: ArrayList<Errand>? = ErrandDAO.selectSource(initSourceType)
 
   init {

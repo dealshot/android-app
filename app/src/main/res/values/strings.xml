@@ -1,20 +1,7 @@
 <resources>
     <string name="app_name">Deal Shot</string>
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">
-        Contacts permissions are needed for providing email completions.
-    </string>
-    <string name="errands_around_me">Errands around me</string>
-    <string name="errand_info">Errand info</string>
-    <string name="plaza_welcome">Welcome, %s!</string>
+    <string name="errand_info">Errand Info</string>
     <string name="create_errand">Create Errand</string>
     <string name="errand_name_hint">Errand name</string>
     <string name="create_errand_dialog_title">Create Errand</string>
@@ -40,5 +27,6 @@
     <string name="closed_errand_title">Completed</string>
     <string name="wip_errand_title">Undergoing</string>
     <string name="errand_completed_tag">Errand Completed</string>
-    <string name="owner_contact_hint">Owner Contact</string>
+    <string name="owner_contact_hint">Poster Contact</string>
+    <string name="leave">Leave</string>
 </resources>
