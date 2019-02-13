@@ -9,14 +9,11 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
+    <string name="permission_rationale">
+        Contacts permissions are needed for providing email completions.
     </string>
     <string name="errands_around_me">Errands around me</string>
-    <string name="my_profile">my profile</string>
     <string name="errand_info">Errand info</string>
-    <string name="take_it">Take it!</string>
-    <string name="action_join_app">Join Deal Shot!</string>
     <string name="plaza_welcome">Welcome, %s!</string>
     <string name="create_errand">Create Errand</string>
     <string name="errand_name_hint">Errand name</string>
@@ -35,12 +32,13 @@
     <string name="pick_up_locale">Pick up at: %s</string>
     <string name="deliver_locale">Deliver at: %s</string>
     <string name="errand_detail_title">Errand Detail</string>
-    <string name="assignee_hint">Assignee</string>
+    <string name="assignee_hint">Assignee Contact</string>
     <string name="cancel">Cancel</string>
     <string name="edit">Edit</string>
     <string name="close">Close</string>
     <string name="owned_errand_title">Posted</string>
     <string name="closed_errand_title">Completed</string>
     <string name="wip_errand_title">Undergoing</string>
-    <string name="status_locale">Current status: %s</string>
+    <string name="errand_completed_tag">Errand Completed</string>
+    <string name="owner_contact_hint">Owner Contact</string>
 </resources>

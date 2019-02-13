@@ -1,63 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="15dp">
-    <LinearLayout android:id="@+id/errand_title_input_wrapper"
-                  android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_margin="5dp">
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/errand_name_hint"/>
-        <EditText android:id="@+id/errand_title_input"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <LinearLayout
+        android:id="@+id/errand_title_input_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/errand_name_hint" />
+
+        <EditText
+            android:id="@+id/errand_title_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/errand_owner_input_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/errand_title_input_wrapper"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/owner_contact_hint" />
+
+        <EditText
+            android:id="@+id/errand_owner_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 
-    <LinearLayout android:id="@+id/pickup_location_input_wrapper"
-                  android:layout_below="@id/errand_title_input_wrapper"
-                  android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_margin="5dp">
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/pick_up_location_hint"/>
-        <EditText android:id="@+id/pickup_location_input"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:id="@+id/pickup_location_input_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/errand_owner_input_wrapper"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pick_up_location_hint" />
+
+        <EditText
+            android:id="@+id/pickup_location_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <LinearLayout android:id="@+id/delivery_location_input_wrapper"
-                  android:layout_below="@id/pickup_location_input_wrapper"
-                  android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_margin="5dp">
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/delivery_location_hint"/>
-        <android.support.design.widget.TextInputEditText
-                android:id="@+id/delivery_location_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:id="@+id/delivery_location_input_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pickup_location_input_wrapper"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delivery_location_hint" />
+
+        <EditText
+            android:id="@+id/delivery_location_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <LinearLayout android:id="@+id/assignee_input_wrapper"
-                  android:layout_below="@id/delivery_location_input_wrapper"
-                  android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_margin="5dp">
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/assignee_hint"/>
-        <android.support.design.widget.TextInputEditText
-                android:id="@+id/assignee_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:id="@+id/assignee_input_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/delivery_location_input_wrapper"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/assignee_hint" />
+
+        <EditText
+            android:id="@+id/assignee_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </RelativeLayout>

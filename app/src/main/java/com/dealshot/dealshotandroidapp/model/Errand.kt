@@ -10,12 +10,14 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Errand(
-  val owner: String = "",
-  var title: String = "",
-  var pickupLocation: String = "",
-  var deliveryLocation: String = "",
-  var status: Status = Companion.Status.UNASSIGNED,
-  var assignee: String = ""
+    val owner: String = "",
+    val ownerContact: String = "",
+    var title: String = "",
+    var pickupLocation: String = "",
+    var deliveryLocation: String = "",
+    var status: Status = Companion.Status.UNASSIGNED,
+    var assignee: String = "",
+    var assigneeContact: String = ""
 ) : Parcelable {
   @IgnoredOnParcel
   @get:Exclude
@@ -27,9 +29,10 @@ data class Errand(
 
   override fun equals(other: Any?): Boolean = other is Errand && other.id == id
 
-  fun claim(uid: String): Errand {
+  fun claim(uid: String, contact: String): Errand {
     status = Companion.Status.WIP
     assignee = uid
+    assigneeContact = contact
     return this
   }
 
