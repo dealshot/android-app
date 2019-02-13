@@ -1,39 +1,41 @@
 package com.dealshot.dealshotandroidapp.ui.adapter
 
 import android.content.Context
+import android.support.v4.app.FragmentManager
 import android.view.View
 import com.dealshot.dealshotandroidapp.R
 import com.dealshot.dealshotandroidapp.dao.AuthController
 import com.dealshot.dealshotandroidapp.dao.ErrandDAO
 import com.dealshot.dealshotandroidapp.model.Errand
-import com.dealshot.dealshotandroidapp.ui.dialog.ErrandDialogBuilder
-import kotlinx.android.synthetic.main.dialog_errand.view.*
+import com.dealshot.dealshotandroidapp.ui.dialog.ErrandManipulationDialogBuilder
+import kotlinx.android.synthetic.main.dialog_errand_manipulation.view.*
 
-class UserErrandAdapter(private var sourceType: ErrandDAO.SourceType) : ErrandAdapter(sourceType) {
+class UserErrandAdapter(
+  private var sourceType: ErrandDAO.SourceType,
+  fragmentManager: FragmentManager
+) : ErrandAdapter(sourceType, fragmentManager) {
   private fun isEditable(errand: Errand) =
-      sourceType == ErrandDAO.SourceType.USER_OWNED && errand.status == Errand.Companion.Status.UNASSIGNED
+    sourceType == ErrandDAO.SourceType.USER_OWNED && errand.status == Errand.Companion.Status.UNASSIGNED
+
+  private fun titleId(errand: Errand) =
+    if (errand.status == Errand.Companion.Status.CLOSED)
+      R.string.errand_completed_tag
+    else
+      R.string.errand_detail_title
 
   override fun updateErrandCardView(context: Context, cardView: View, errand: Errand) {
     cardView.setOnClickListener {
-      val builder = ErrandDialogBuilder(context)
-      
-      builder.setErrand(errand)
-      
-      if (errand.status == Errand.Companion.Status.CLOSED) {
-        builder.setTitle(context.getString(R.string.errand_completed_tag))
-      } else {
+      val builder = ErrandManipulationDialogBuilder(context, fragmentManager)
 
-        builder.setTitle(context.getString(R.string.errand_detail_title))
-      }
-      
-      if (!isEditable(errand)) {
-        builder.disableInput()
-      } else {
-        builder.setViewInvisible(R.id.errand_owner_input_wrapper)
-      }
+      builder
+        .setEnableEdit(isEditable(errand))
+        .setTitle(context.getString(titleId(errand)))
+        .setErrand(errand)
 
-      if (errand.status == Errand.Companion.Status.UNASSIGNED ||
-          errand.assignee == AuthController.currentUID()) {
+      if (
+        errand.status == Errand.Companion.Status.UNASSIGNED ||
+        errand.assignee == AuthController.currentUID()
+      ) {
         builder.setViewInvisible(R.id.assignee_input_wrapper)
       }
 
@@ -41,35 +43,38 @@ class UserErrandAdapter(private var sourceType: ErrandDAO.SourceType) : ErrandAd
         ErrandDAO.SourceType.USER_OWNED -> {
           if (errand.status == Errand.Companion.Status.UNASSIGNED) {
             builder
-                .setPositiveButton(context.getString(R.string.edit)) {
-                  val title = it.errand_title_input.text.toString()
-                  val pickupLocation = it.pickup_location_input.text.toString()
-                  val deliveryLocation = it.delivery_location_input.text.toString()
-                  errand.title = title
-                  errand.pickupLocation = pickupLocation
-                  errand.deliveryLocation = deliveryLocation
-                  ErrandDAO.updateErrand(errand)
-                }
-                .setNegativeButton(context.getString(R.string.remove)) {
-                  ErrandDAO.deleteErrand(errand)
-                }
+              .setPositiveButton(context.getString(R.string.edit)) {
+                val title = it.errand_title_input.text.toString()
+                val pickupLocation = it.pickup_location_input.text.toString()
+                val deliveryLocation = it.delivery_location_input.text.toString()
+                errand.title = title
+                errand.pickupLocation = pickupLocation
+                errand.deliveryLocation = deliveryLocation
+                ErrandDAO.updateErrand(errand)
+              }
+          }
+
+          if (errand.status != Errand.Companion.Status.WIP) {
+            builder.setNegativeButton(context.getString(R.string.remove)) {
+              ErrandDAO.deleteErrand(errand)
+            }
           }
         }
         ErrandDAO.SourceType.USER_WIP -> {
           builder
-              .setPositiveButton(context.getString(R.string.close)) {
-                ErrandDAO.updateErrand(errand.close())
-              }
-              .setNegativeButton(context.getString(R.string.release)) {
-                ErrandDAO.updateErrand(errand.release())
-              }
+            .setPositiveButton(context.getString(R.string.close)) {
+              ErrandDAO.updateErrand(errand.close())
+            }
+            .setNegativeButton(context.getString(R.string.release)) {
+              ErrandDAO.updateErrand(errand.release())
+            }
         }
         else -> {
-          builder.setNegativeButton(context.getString(R.string.cancel)) { }
+          builder.setNegativeButton(context.getString(R.string.leave)) { }
         }
       }
-      
-      builder.show()
+
+      builder.launch()
     }
   }
 }
