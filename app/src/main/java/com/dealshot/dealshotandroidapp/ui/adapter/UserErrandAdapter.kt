@@ -28,6 +28,8 @@ class UserErrandAdapter(private var sourceType: ErrandDAO.SourceType) : ErrandAd
       
       if (!isEditable(errand)) {
         builder.disableInput()
+      } else {
+        builder.setViewInvisible(R.id.errand_owner_input_wrapper)
       }
 
       if (errand.status == Errand.Companion.Status.UNASSIGNED ||
