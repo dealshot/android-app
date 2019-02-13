@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_unassigned"
+        android:icon="@drawable/ic_bulleted_list"
+        android:title="@string/owned_errand_title"/>
+
+    <item
+        android:id="@+id/navigation_wip"
+        android:icon="@drawable/ic_bulleted_list"
+        android:title="@string/wip_errand_title"/>
+
+    <item
+        android:id="@+id/navigation_closed"
+        android:icon="@drawable/ic_bulleted_list"
+        android:title="@string/closed_errand_title"/>
+</menu>

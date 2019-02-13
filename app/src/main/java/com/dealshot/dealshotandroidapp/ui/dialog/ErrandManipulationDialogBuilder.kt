@@ -2,14 +2,13 @@ package com.dealshot.dealshotandroidapp.ui.dialog
 
 import android.app.AlertDialog
 import android.content.Context
-import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import com.dealshot.dealshotandroidapp.R
 import com.dealshot.dealshotandroidapp.model.Errand
 import kotlinx.android.synthetic.main.dialog_errand_manipulation.view.*
 
-class ErrandManipulationDialogBuilder(private val context: Context, private val fragmentManager: FragmentManager) {
+class ErrandManipulationDialogBuilder(private val context: Context) {
   private var dialogView = makeDialogView()
 
   private var builder = AlertDialog.Builder(context)

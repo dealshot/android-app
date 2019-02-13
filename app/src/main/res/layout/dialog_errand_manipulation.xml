@@ -41,7 +41,6 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-
     <LinearLayout
         android:id="@+id/pickup_location_input_wrapper"
         android:layout_width="match_parent"

@@ -1,6 +1,7 @@
 package com.dealshot.dealshotandroidapp.ui.fragment
 
 import android.annotation.SuppressLint
+import android.opengl.Visibility
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -11,18 +12,21 @@ import com.dealshot.dealshotandroidapp.ui.adapter.UserErrandAdapter
 import com.dealshot.dealshotandroidapp.dao.ErrandDAO
 import com.dealshot.dealshotandroidapp.model.Errand
 import com.dealshot.dealshotandroidapp.ui.dialog.ErrandManipulationDialogBuilder
+import kotlinx.android.synthetic.main.activity_user_center.*
+import kotlinx.android.synthetic.main.activity_user_center.view.*
+
 import kotlinx.android.synthetic.main.dialog_errand_manipulation.view.*
 import kotlinx.android.synthetic.main.fragment_user_center_section.view.*
 
 class UserCenterSectionFragment : Fragment() {
   private var sourceType: ErrandDAO.SourceType? = null
-  private var canAdd: Boolean = false
+  private var userOwned: Boolean = false
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     arguments?.let {
       sourceType = it.getParcelable(ARGS_SOURCE_TYPE)
-      canAdd = it.getBoolean(ARGS_CAN_ADD)
+      userOwned = it.getBoolean(ARGS_USER_OWNED)
     }
   }
 
@@ -34,12 +38,15 @@ class UserCenterSectionFragment : Fragment() {
 
   @SuppressLint("RestrictedApi")
   private fun bindView(itemView: View) {
+    val adapter = UserErrandAdapter(sourceType!!)
+
     itemView.user_center_errands_view.layoutManager = LinearLayoutManager(context)
-    itemView.user_center_errands_view.adapter = UserErrandAdapter(sourceType!!, fragmentManager!!)
-    if (canAdd) {
+    itemView.user_center_errands_view.adapter = adapter
+    itemView.user_center_errands_view.setHasFixedSize(true)
+    if (userOwned) {
       itemView.create_errand_button.visibility = View.VISIBLE
       itemView.create_errand_button.setOnClickListener {
-        ErrandManipulationDialogBuilder(context!!, fragmentManager!!)
+        ErrandManipulationDialogBuilder(context!!)
           .setTitle(getString(R.string.create_errand_dialog_title))
           .setEnableEdit(true)
           .setViewInvisible(R.id.assignee_input_wrapper)
@@ -61,20 +68,34 @@ class UserCenterSectionFragment : Fragment() {
           .setNegativeButton(getString(R.string.leave)) {}
           .launch()
       }
+
+      itemView.navigation.visibility = View.VISIBLE
+      adapter.setFilterBase(Errand.Companion.Status.UNASSIGNED)
+      itemView.navigation.setOnNavigationItemReselectedListener {
+        adapter.setFilterBase(
+          when (it.itemId) {
+            R.id.navigation_unassigned -> Errand.Companion.Status.UNASSIGNED
+            R.id.navigation_wip -> Errand.Companion.Status.WIP
+            R.id.navigation_closed -> Errand.Companion.Status.CLOSED
+            else -> null
+          }
+        )
+      }
     }
   }
 
   companion object {
     private const val ARGS_SOURCE_TYPE = "source_type"
 
-    private const val ARGS_CAN_ADD = "can_add"
+    private const val ARGS_USER_OWNED = "user_owned"
 
     @JvmStatic
-    fun newInstance(type: ErrandDAO.SourceType, canAdd: Boolean) = UserCenterSectionFragment().apply {
-      arguments = Bundle().apply {
-        putParcelable(ARGS_SOURCE_TYPE, type)
-        putBoolean(ARGS_CAN_ADD, canAdd)
+    fun newInstance(type: ErrandDAO.SourceType, userOwned: Boolean) =
+      UserCenterSectionFragment().apply {
+        arguments = Bundle().apply {
+          putParcelable(ARGS_SOURCE_TYPE, type)
+          putBoolean(ARGS_USER_OWNED, userOwned)
+        }
       }
-    }
   }
 }
