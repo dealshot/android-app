@@ -1,6 +1,5 @@
 package com.dealshot.dealshotandroidapp
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -8,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import com.dealshot.dealshotandroidapp.ui.adapter.PlazaErrandAdapter
 import com.dealshot.dealshotandroidapp.dao.AuthController
 import kotlinx.android.synthetic.main.activity_plaza.*
@@ -17,7 +15,7 @@ class PlazaActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_plaza)
-    plaza_errand_view.adapter = PlazaErrandAdapter()
+    plaza_errand_view.adapter = PlazaErrandAdapter(supportFragmentManager)
     plaza_errand_view.layoutManager = LinearLayoutManager(this)
 
   }
