@@ -14,6 +14,7 @@ import com.dealshot.dealshotandroidapp.model.Errand
 import com.dealshot.dealshotandroidapp.ui.dialog.ErrandManipulationDialogBuilder
 import kotlinx.android.synthetic.main.activity_user_center.*
 import kotlinx.android.synthetic.main.activity_user_center.view.*
+
 import kotlinx.android.synthetic.main.dialog_errand_manipulation.view.*
 import kotlinx.android.synthetic.main.fragment_user_center_section.view.*
 

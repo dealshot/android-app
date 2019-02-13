@@ -1,6 +1,7 @@
 package com.dealshot.dealshotandroidapp.ui.adapter
 
 import android.content.Context
+import android.support.v4.app.FragmentManager
 import android.view.View
 import com.dealshot.dealshotandroidapp.R
 import com.dealshot.dealshotandroidapp.dao.AuthController
@@ -9,7 +10,10 @@ import com.dealshot.dealshotandroidapp.model.Errand
 import com.dealshot.dealshotandroidapp.ui.dialog.ErrandManipulationDialogBuilder
 import kotlinx.android.synthetic.main.dialog_errand_manipulation.view.*
 
-class UserErrandAdapter(private var sourceType: ErrandDAO.SourceType) : ErrandAdapter(sourceType) {
+class UserErrandAdapter(
+  private var sourceType: ErrandDAO.SourceType,
+  fragmentManager: FragmentManager
+) : ErrandAdapter(sourceType, fragmentManager) {
   private fun isEditable(errand: Errand) =
     sourceType == ErrandDAO.SourceType.USER_OWNED
       && errand.status == Errand.Companion.Status.UNASSIGNED

@@ -9,7 +9,9 @@ import com.dealshot.dealshotandroidapp.dao.ErrandDAO
 import com.dealshot.dealshotandroidapp.model.Errand
 import com.dealshot.dealshotandroidapp.ui.dialog.ErrandManipulationDialogBuilder
 
-class PlazaErrandAdapter : ErrandAdapter(ErrandDAO.SourceType.PLAZA) {
+class PlazaErrandAdapter(
+  fragmentManager: FragmentManager
+) : ErrandAdapter(ErrandDAO.SourceType.PLAZA, fragmentManager) {
   override fun updateErrandCardView(context: Context, cardView: View, errand: Errand) {
     cardView.setOnClickListener {
       ErrandManipulationDialogBuilder(context)
