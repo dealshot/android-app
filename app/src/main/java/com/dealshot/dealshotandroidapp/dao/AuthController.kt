@@ -22,6 +22,8 @@ object AuthController {
 
   fun currentUID(): String = auth.currentUser!!.uid
 
+  fun currentContact(): String = auth.currentUser!!.email ?: (auth.currentUser!!.phoneNumber ?: "")
+
   fun hasUser() = auth.currentUser != null
 
   fun addAuthStateListener(listener: (FirebaseAuth) -> Unit) {
