@@ -8,6 +8,15 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".UserCenterActivity">
+    
+    <ImageView
+            android:id="@+id/user_center_background"
+            android:src="@drawable/rose2"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+    />
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/container"

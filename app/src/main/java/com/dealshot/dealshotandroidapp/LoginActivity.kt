@@ -22,6 +22,7 @@ class LoginActivity : AppCompatActivity() {
     startActivityForResult(
       AuthController
         .createSignInIntentBuilder()
+        .setLogo(R.drawable.logo)
         .build(),
       RC_SIGN_IN
     )

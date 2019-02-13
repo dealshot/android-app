@@ -11,11 +11,13 @@ import com.dealshot.dealshotandroidapp.dao.ErrandDAO
 import com.dealshot.dealshotandroidapp.model.Errand
 import com.dealshot.dealshotandroidapp.ui.viewholder.ErrandViewHolder
 
+
 abstract class ErrandAdapter(
   initSourceType: ErrandDAO.SourceType
 ) :
   RecyclerView.Adapter<ErrandViewHolder>() {
   private var sourceOrigin: ArrayList<Errand>? = ErrandDAO.selectSource(initSourceType)
+
 
   init {
     ErrandDAO.addSnapShotListener { _, _ ->

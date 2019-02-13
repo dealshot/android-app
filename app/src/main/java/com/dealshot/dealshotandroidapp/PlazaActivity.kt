@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.dealshot.dealshotandroidapp.ui.adapter.PlazaErrandAdapter
@@ -16,6 +17,7 @@ class PlazaActivity : AppCompatActivity() {
     setContentView(R.layout.activity_plaza)
     plaza_errand_view.adapter = PlazaErrandAdapter(supportFragmentManager)
     plaza_errand_view.layoutManager = LinearLayoutManager(this)
+
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
