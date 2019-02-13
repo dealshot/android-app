@@ -16,7 +16,7 @@ object ErrandDAO {
     USER_CLOSED,
     PLAZA
   }
-
+  
   private class RefContent {
     val source: ArrayList<Errand> = ArrayList()
     var sourceListener: ListenerRegistration? = null

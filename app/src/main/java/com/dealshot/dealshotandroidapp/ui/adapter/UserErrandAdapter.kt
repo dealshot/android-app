@@ -66,7 +66,7 @@ class UserErrandAdapter(private var sourceType: ErrandDAO.SourceType) : ErrandAd
           builder.setNegativeButton(context.getString(R.string.cancel)) { }
         }
       }
-
+      
       builder.show()
     }
   }

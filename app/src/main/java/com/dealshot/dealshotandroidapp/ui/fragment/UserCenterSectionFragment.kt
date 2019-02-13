@@ -63,7 +63,6 @@ class UserCenterSectionFragment : Fragment() {
   companion object {
     private const val ARGS_SOURCE_TYPE = "source_type"
 
-
     private const val ARGS_CAN_ADD = "can_add"
 
     @JvmStatic
