@@ -14,7 +14,7 @@ class PlazaErrandAdapter(
 ) : ErrandAdapter(ErrandDAO.SourceType.PLAZA, fragmentManager) {
   override fun updateErrandCardView(context: Context, cardView: View, errand: Errand) {
     cardView.setOnClickListener {
-      ErrandManipulationDialogBuilder(context, fragmentManager)
+      ErrandManipulationDialogBuilder(context)
         .setTitle(context.getString(R.string.errand_detail_title))
         .setErrand(errand)
         .setViewInvisible(R.id.assignee_input_wrapper)

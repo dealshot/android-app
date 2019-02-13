@@ -15,17 +15,30 @@ class UserErrandAdapter(
   fragmentManager: FragmentManager
 ) : ErrandAdapter(sourceType, fragmentManager) {
   private fun isEditable(errand: Errand) =
-    sourceType == ErrandDAO.SourceType.USER_OWNED && errand.status == Errand.Companion.Status.UNASSIGNED
+    sourceType == ErrandDAO.SourceType.USER_OWNED
+      && errand.status == Errand.Companion.Status.UNASSIGNED
+
+  private var filterBase: Errand.Companion.Status? = null
+
+  override fun source(): ArrayList<Errand> {
+    val base = super.source()
+    if (filterBase == null) {
+      return base
+    }
+    return ArrayList(base.filter { it.status == filterBase })
+  }
+  fun setFilterBase(status: Errand.Companion.Status?) {
+    filterBase = status
+    notifyDataSetChanged()
+  }
 
   private fun titleId(errand: Errand) =
-    if (errand.status == Errand.Companion.Status.CLOSED)
-      R.string.errand_completed_tag
-    else
-      R.string.errand_detail_title
+    if (errand.status == Errand.Companion.Status.CLOSED) R.string.errand_completed_tag
+    else R.string.errand_detail_title
 
   override fun updateErrandCardView(context: Context, cardView: View, errand: Errand) {
     cardView.setOnClickListener {
-      val builder = ErrandManipulationDialogBuilder(context, fragmentManager)
+      val builder = ErrandManipulationDialogBuilder(context)
 
       builder
         .setEnableEdit(isEditable(errand))
